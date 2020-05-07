@@ -26,7 +26,7 @@
                                 <div class="col">
                                     <label for="currency">Currency</label>
                                     <select name="currency" id="currency" class="form-control">
-                                        @foreach(App\Currency::all() as $currency)
+                                        @foreach($currencies as $currency)
                                             <option value="{{ $currency->id }}" {{ $currency_id == $currency->id ? 'selected' : '' }}>{{ $currency->code }}</option>
                                         @endforeach
                                     </select>
@@ -35,7 +35,7 @@
                                     <label for="state">State</label>
                                     <select name="state" id="state" class="form-control">
                                         <option value="0">-Select State-</option>
-                                        @foreach(App\State::all() as $state)
+                                        @foreach($states as $state)
                                             <option value="{{ $state->id }}" {{ $state_id == $state->id ? 'selected' : '' }}>{{ $state->name }}</option>
                                         @endforeach
                                     </select>
