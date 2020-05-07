@@ -18,10 +18,13 @@
             <div class="col-md-8">
                 <a href="{{ route('rate.index') }}">Index</a>
                 <div class="card my-3">
-                    <div class="card-header">Add Fx Rate</div>
+                    <div class="card-header">{{ isset($rate) ? 'Edit' : 'Add' }} Fx Rate</div>
                     <div class="card-body">
 
-                        <form method="post" action="{{ route('rate.store') }}">
+                        <form method="post" action="{{ isset($rate) ? route('rate.update', $rate->id) : route('rate.store') }}">
+                            @if(isset($rate))
+                                @method('put')
+                            @endif
                             @csrf
                             <div class="form-row mb-3">
                                 <div class="col">
@@ -29,7 +32,7 @@
                                     <input type="number" class="form-control @error('amount') is-invalid @enderror"
                                            id="amount" name="amount" min="0"
                                            placeholder="Eg. 1000"
-                                           value="{{ old('amount') }}">
+                                           value="{{ old('amount', optional($rate ?? '')->rate) }}">
 
                                     @error('amount')
                                     <span class="invalid-feedback" role="alert">
@@ -43,12 +46,12 @@
                                     <select name="currency" id="currency" class="form-control">
                                         @foreach($currencies as $currency)
                                             <option
-                                                value="{{ $currency->id }}" {{ old('currency') == $currency->id ? 'selected' : '' }}>{{ $currency->code }}</option>
+                                                value="{{ $currency->id }}" {{ old('currency', optional($rate ?? '')->currency_id) == $currency->id ? 'selected' : '' }}>{{ $currency->code }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary align-self-center" id="submit">Add</button>
+                            <button type="submit" class="btn btn-primary align-self-center" id="submit">{{ $rate ?? '' ? 'Update' : 'Add' }}</button>
                         </form>
                     </div>
                 </div>

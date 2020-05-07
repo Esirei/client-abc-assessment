@@ -32,7 +32,7 @@
 
                                     <a class="text-danger ml-2"
                                        href="{{ route('rate.destroy', ['rate' => $rate->id]) }}"
-                                       onclick="event.preventDefault(); document.getElementById('{{ "delete-rate-" . $rate->id }}').submit();">Delete</a>
+                                       onclick="event.preventDefault(); const x = confirm('Delete?'); if(x) document.getElementById('{{ "delete-rate-" . $rate->id }}').submit();">Delete</a>
 
                                     <form id="{{ 'delete-rate-' . $rate->id }}"
                                           action="{{ route('rate.destroy', ['rate' => $rate->id]) }}" method="post"
@@ -43,6 +43,9 @@
                                 </div>
                                 <div class="card-footer text-muted">
                                     <small>Created at: {{ $rate->created_at }}</small>
+                                    @if($rate->created_at != $rate->updated_at)
+                                        , <small>Updated at: {{ $rate->updated_at }}</small>
+                                    @endif
                                 </div>
                             </div>
                         @endforeach

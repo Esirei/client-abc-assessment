@@ -19,7 +19,7 @@ class RateController extends Controller
      */
     public function index()
     {
-        $rates = Rate::query()->where('user_id', auth()->id())->get();
+        $rates = Rate::query()->where('user_id', auth()->id())->latest('updated_at')->get();
         return view('rates.index', compact('rates'));
     }
 
@@ -85,7 +85,18 @@ class RateController extends Controller
      */
     public function update(Request $request, Rate $rate)
     {
-        //
+        $this->validate($request, [
+            'amount' => 'required',
+        ]);
+
+        $amount = $request->post('amount');
+        $currency_id = $request->post('currency');
+
+        // Should probably cancel every request made on this rate here.
+
+        $rate->update(['rate' => $amount, 'currency_id' => $currency_id]);
+        $request->session()->flash('status', 'Your fx rate was updated successfully');
+        return redirect()->route('rate.index');
     }
 
     /**
@@ -96,7 +107,8 @@ class RateController extends Controller
      */
     public function destroy(Rate $rate)
     {
-//        return 'Hello';
+        // Should probably cancel every request made on this rate here.
+
         $rate->delete();
         \request()->session()->flash('status', 'Fx rate has been deleted');
         return redirect()->back();
