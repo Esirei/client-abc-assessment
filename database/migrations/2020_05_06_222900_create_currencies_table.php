@@ -17,7 +17,7 @@ class CreateCurrenciesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('code')->unique();
-            $table->unsignedBigInteger('rate');
+            $table->unsignedDecimal('rate');
             $table->timestamps();
         });
     }
