@@ -25,7 +25,7 @@
                             <div class="card mt-3">
                                 <div class="card-body">
                                     <h4 class="card-title">
-                                        NGN{{ number_format($rate->amount) . ' / ' . $rate->currency->code }}
+                                        NGN{{ number_format($rate->amount, 2) . ' / ' . $rate->currency->code }}
                                     </h4>
 
                                     <a href="{{ route('rate.edit', ['rate' => $rate->id]) }}">Edit</a>

@@ -6,7 +6,6 @@ use App\Currency;
 use App\Rate;
 use App\State;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
 {

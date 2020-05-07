@@ -31,7 +31,7 @@
                                     <label for="amount">Amount</label>
                                     <input type="number" class="form-control @error('amount') is-invalid @enderror"
                                            id="amount" name="amount" min="0"
-                                           placeholder="Eg. 1000"
+                                           placeholder="Eg. 1000" step="0.01"
                                            value="{{ old('amount', optional($rate ?? '')->amount) }}">
 
                                     @error('amount')
