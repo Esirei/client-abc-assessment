@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 @foreach($rates as $rate)
-                    @include('includes.rate')
+                    @include('includes.rates.buyer_rate')
                 @endforeach
                 @if(count($rates) > 0)
                     <div class="row justify-content-center">
