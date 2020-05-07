@@ -32,7 +32,7 @@
                                     <input type="number" class="form-control @error('amount') is-invalid @enderror"
                                            id="amount" name="amount" min="0"
                                            placeholder="Eg. 1000"
-                                           value="{{ old('amount', optional($rate ?? '')->rate) }}">
+                                           value="{{ old('amount', optional($rate ?? '')->amount) }}">
 
                                     @error('amount')
                                     <span class="invalid-feedback" role="alert">

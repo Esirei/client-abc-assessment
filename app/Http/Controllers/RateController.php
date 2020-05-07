@@ -48,7 +48,7 @@ class RateController extends Controller
 
         $amount = $request->post('amount');
         $currency_id = $request->post('currency');
-        Rate::query()->create(['rate' => $amount, 'currency_id' => $currency_id, 'user_id' => auth()->id()]);
+        Rate::query()->create(['amount' => $amount, 'currency_id' => $currency_id, 'user_id' => auth()->id()]);
         $request->session()->flash('status', 'Your fx rate was created successfully');
         return redirect()->route('rate.index');
     }
@@ -94,7 +94,7 @@ class RateController extends Controller
 
         // Should probably cancel every request made on this rate here.
 
-        $rate->update(['rate' => $amount, 'currency_id' => $currency_id]);
+        $rate->update(['amount' => $amount, 'currency_id' => $currency_id]);
         $request->session()->flash('status', 'Your fx rate was updated successfully');
         return redirect()->route('rate.index');
     }

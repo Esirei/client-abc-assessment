@@ -17,7 +17,7 @@ class CreateRatesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('currency_id');
-            $table->unsignedDecimal('rate');
+            $table->unsignedDecimal('amount');
             $table->timestamps();
         });
     }

@@ -13,6 +13,6 @@ $factory->define(Rate::class, function (Faker $faker) {
     return [
         'user_id' => User::query()->inRandomOrder()->limit(1)->first(['id'])->id,
         'currency_id' => $currency->id,
-        'rate' => $faker->numberBetween($rate * 0.85 * 5, $rate * 1.2 * 5) / 5,
+        'amount' => $faker->numberBetween($rate * 0.85 * 5, $rate * 1.2 * 5) / 5,
     ];
 });

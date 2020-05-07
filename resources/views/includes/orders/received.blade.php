@@ -3,8 +3,8 @@
         <h4 class="card-title">{{ number_format($order->amount) }} <small>{{ $order->rate->currency->code }}</small>
         </h4>
         <h4 class="card-title">
-            NGN{{ number_format($order->amount * $order->rate->rate) }}
-            @ {{ $order->rate->rate . '/' . $order->rate->currency->code }}
+            NGN{{ number_format($order->amount * $order->rate->amount) }}
+            @ {{ $order->rate->amount . '/' . $order->rate->currency->code }}
         </h4>
         <p class="card-text">Buyer: {{ $order->user->name }} from {{ $order->user->state->name }} state</p>
 
