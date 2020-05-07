@@ -1,5 +1,8 @@
 <?php
 
+use App\State;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +18,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/test', function () {
+    return State::query()->inRandomOrder()->limit(1)->first(['id'])->id;
+    return json_decode(file_get_contents(storage_path('json/currencies.json')), true);
 });
 
 Auth::routes();

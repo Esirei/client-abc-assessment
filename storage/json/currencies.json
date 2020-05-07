@@ -1,0 +1,22 @@
+[
+    {
+        "name": "U.S. Dollar",
+        "code": "USD",
+        "rate": 360.8810178817
+    },
+    {
+        "name": "Euro",
+        "code": "EUR",
+        "rate": 390.94602269784
+    },
+    {
+        "name": "U.K. Pound Sterling",
+        "code": "GBP",
+        "rate": 448.37965947471
+    },
+    {
+        "name": "Canadian Dollar",
+        "code": "CAD",
+        "rate": 257.11174531837
+    }
+]
