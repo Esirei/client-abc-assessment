@@ -31,7 +31,7 @@ class WelcomeController extends Controller
                 if ($state_id) {
                     $query->where('id', $state_id);
                 }
-            })->orderBy('rate')->get();
+            })->orderBy('rate')->paginate(10);
         }
         return view('welcome', compact('rates', 'amount', 'currency_id', 'state_id', 'currencies', 'states'));
     }
