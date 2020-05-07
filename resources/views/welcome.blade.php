@@ -9,7 +9,7 @@
 
                     <div class="card-body">
                         @if (session('status'))
-                            <div class="alert alert-success" role="alert">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 {{ session('status') }}
                             </div>
                         @endif
@@ -18,7 +18,7 @@
                             <div class="form-row mb-3">
                                 <div class="col">
                                     <label for="amount">Amount</label>
-                                    <input type="number" class="form-control" id="amount" name="amount"
+                                    <input type="number" class="form-control" id="amount" name="amount" min="0"
                                            placeholder="Eg. 1000"
                                            value="{{ $amount ?? '' }}">
                                 </div>
@@ -50,6 +50,7 @@
                         <div class="card-body">
                             <h4 class="card-title">NGN{{ number_format($amount * $rate->rate) }} @ {{ $rate->rate }}/{{ $rate->currency->code }}</h4>
                             <p class="card-text">Seller: {{ $rate->user->name }} at {{ $rate->user->state->name }} state</p>
+                            <a href="{{ route('order.create', ['rate_id' => $rate->id, 'amount' => $amount]) }}" class="btn btn-primary" onclick="return confirm('Are you sure?')">Request</a>
                         </div>
                     </div>
                 @endforeach

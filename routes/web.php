@@ -25,11 +25,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/test', function () {
-    return Rate::with(['user.state', 'currency'])->whereHas('currency', function (Builder $query) {
-        $query->where('name', 'U.S. Dollar');
-    })->whereHas('user.state', function (Builder $query) {
-        $query->whereIn('name', ['Delta', 'Edo']);
-    })->get();
-    return User::query()->with(['orders', 'rates.currency', 'state'])->get();
+Route::group(['prefix' => 'order', 'as' => 'order.'], function () {
+    Route::get('/', 'OrderController@store')->name('create');
+    Route::post('/expected-delivery', 'OrderController@expectedDelivery')->name('expected-delivery');
 });

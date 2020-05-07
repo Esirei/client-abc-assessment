@@ -3,10 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\Rate;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use MongoDB\Driver\Session;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -35,7 +43,19 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rate_id = $request->get('rate_id');
+        $amount = $request->get('amount');
+        $order = Order::query()->create(['user_id' => auth()->id(), 'amount' => $amount, 'rate_id' => $rate_id]);
+        $request->session()->flash('status', 'Request successfully sent.');
+        return redirect()->route('home');
+    }
+
+    public function expectedDelivery(Request $request)
+    {
+        $order = Order::query()->find($request->post('order_id'));
+        $order->update(['expected_delivery' => $request->post('expected_delivery')]);
+        $request->session()->flash('status', 'Expected delivery updated.');
+        return redirect()->route('home');
     }
 
     /**

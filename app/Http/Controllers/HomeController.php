@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $orders = Order::with(['rate.currency', 'rate.user', 'user'])->where('user_id', auth()->id())->latest()->get();
+        $receivedOrders = [];
+
+        if (auth()->user()->is_seller) {
+            $receivedOrders = Order::with(['rate.currency', 'rate.user', 'user'])->whereHas('rate.user', function (Builder $query) {
+                $query->where('id', auth()->id());
+            })->latest()->get();
+        }
+
+        return view('home', compact('orders', 'receivedOrders'));
     }
 }

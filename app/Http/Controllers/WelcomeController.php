@@ -20,7 +20,7 @@ class WelcomeController extends Controller
     {
         $currencies = Currency::all();
         $states = State::all();
-        $amount = request('amount', 0);
+        $amount = request('amount', '');
         $currency_id = request('currency', '');
         $state_id = request('state', '');
         $rates = [];
