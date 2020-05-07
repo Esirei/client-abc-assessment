@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Currency;
 use App\Rate;
 use Illuminate\Http\Request;
 
 class RateController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,8 @@ class RateController extends Controller
      */
     public function index()
     {
-        //
+        $rates = Rate::query()->where('user_id', auth()->id())->get();
+        return view('rates.index', compact('rates'));
     }
 
     /**
@@ -24,7 +30,8 @@ class RateController extends Controller
      */
     public function create()
     {
-        //
+        $currencies = Currency::all();
+        return view('rates.create', compact('currencies'));
     }
 
     /**
@@ -35,7 +42,15 @@ class RateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'amount' => 'required',
+        ]);
+
+        $amount = $request->post('amount');
+        $currency_id = $request->post('currency');
+        Rate::query()->create(['rate' => $amount, 'currency_id' => $currency_id, 'user_id' => auth()->id()]);
+        $request->session()->flash('status', 'Your fx rate created successfully');
+        return redirect()->route('rate.create');
     }
 
     /**

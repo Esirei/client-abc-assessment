@@ -29,3 +29,8 @@ Route::group(['prefix' => 'order', 'as' => 'order.'], function () {
     Route::get('/', 'OrderController@store')->name('create');
     Route::post('/expected-delivery', 'OrderController@expectedDelivery')->name('expected-delivery');
 });
+
+Route::group(['prefix' => 'rate', 'as' => 'rate.'], function () {
+    Route::get('create', 'RateController@create')->name('create');
+    Route::post('store', 'RateController@store')->name('store');
+});
