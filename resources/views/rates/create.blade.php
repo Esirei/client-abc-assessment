@@ -16,7 +16,8 @@
             </div>
 
             <div class="col-md-8">
-                <div class="card">
+                <a href="{{ route('rate.index') }}">Index</a>
+                <div class="card my-3">
                     <div class="card-header">Add Fx Rate</div>
                     <div class="card-body">
 
@@ -51,6 +52,7 @@
                         </form>
                     </div>
                 </div>
+                <a href="{{ route('rate.index') }}">Index</a>
             </div>
         </div>
     </div>

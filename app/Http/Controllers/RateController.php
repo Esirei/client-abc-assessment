@@ -49,8 +49,8 @@ class RateController extends Controller
         $amount = $request->post('amount');
         $currency_id = $request->post('currency');
         Rate::query()->create(['rate' => $amount, 'currency_id' => $currency_id, 'user_id' => auth()->id()]);
-        $request->session()->flash('status', 'Your fx rate created successfully');
-        return redirect()->route('rate.create');
+        $request->session()->flash('status', 'Your fx rate was created successfully');
+        return redirect()->route('rate.index');
     }
 
     /**
@@ -72,7 +72,8 @@ class RateController extends Controller
      */
     public function edit(Rate $rate)
     {
-        //
+        $currencies = Currency::all();
+        return view('rates.create', compact('rate', 'currencies'));
     }
 
     /**
@@ -95,6 +96,9 @@ class RateController extends Controller
      */
     public function destroy(Rate $rate)
     {
-        //
+//        return 'Hello';
+        $rate->delete();
+        \request()->session()->flash('status', 'Fx rate has been deleted');
+        return redirect()->back();
     }
 }
