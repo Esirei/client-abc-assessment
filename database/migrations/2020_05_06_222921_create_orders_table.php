@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('rate_id');
             $table->unsignedBigInteger('amount');
-            $table->timestamp('expected_delivery');
+            $table->timestamp('expected_delivery')->nullable();
             $table->timestamps();
         });
     }
