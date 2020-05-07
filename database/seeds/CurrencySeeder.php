@@ -13,6 +13,6 @@ class CurrencySeeder extends Seeder
     public function run()
     {
         $currencies = json_decode(file_get_contents(storage_path('json/currencies.json')), true);
-        Currency::query()->insert($currencies);
+        Currency::query()->create($currencies);
     }
 }

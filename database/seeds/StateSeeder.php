@@ -15,7 +15,7 @@ class StateSeeder extends Seeder
     {
         $states = json_decode(file_get_contents(storage_path('json/states.json')), true);
         foreach ($states as $state) {
-            State::query()->insert(['name' => $state]);
+            State::query()->create(['name' => $state]);
         }
     }
 }
