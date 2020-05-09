@@ -24,6 +24,7 @@ class WelcomeController extends Controller
         $state_id = request('state', '');
         $rates = [];
         if ($amount) {
+            // Get rates where the currency matches selected currency, and seller's state matches selected state.
             $rates = Rate::with(['user.state', 'currency'])->whereHas('currency', function (Builder $query) use ($currency_id) {
                 $query->where('id', $currency_id);
             })->whereHas('user.state', function (Builder $query) use ($state_id) {

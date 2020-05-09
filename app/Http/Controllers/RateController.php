@@ -15,7 +15,7 @@ class RateController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
@@ -26,7 +26,7 @@ class RateController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Support\Renderable
      */
     public function create()
     {
@@ -38,7 +38,7 @@ class RateController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -68,7 +68,7 @@ class RateController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Rate  $rate
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Support\Renderable
      */
     public function edit(Rate $rate)
     {
@@ -81,7 +81,7 @@ class RateController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Rate  $rate
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Rate $rate)
     {
@@ -103,7 +103,7 @@ class RateController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Rate  $rate
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Rate $rate)
     {
